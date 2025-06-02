@@ -75,25 +75,70 @@ func Tetromino(file *os.File) []tetromino {
 		row++
 	}
 
-	// After the loop, check if the last tetromino was complete
 	if row == 4 {
 		tetrominoes = append(tetrominoes, currentTetromino)
 	} else if row > 0 {
 		NotValid()
 	}
 
+	for i := 0; i < len(tetrominoes); i++ {
+		tetrominoes[i] = MoveTetromino(tetrominoes[i])
+	}
+
 	return tetrominoes
+}
+
+func MoveTetromino(t tetromino) tetromino {
+	minRow := 4
+	minCol := 4
+
+	// Cherche l'emplacement de la première case de la pièce
+	for r := 0; r < 4; r++ {
+		for c := 0; c < 4; c++ {
+			if t[r][c] == '#' {
+				if r < minRow {
+					minRow = r
+				}
+				if c < minCol {
+					minCol = c
+				}
+			}
+		}
+	}
+	if minRow == 4 && minCol == 4 {
+		return t
+	}
+
+	// Crée un tetromino vide
+	var newTetro tetromino
+	for r := 0; r < 4; r++ {
+		for c := 0; c < 4; c++ {
+			newTetro[r][c] = '.'
+		}
+	}
+
+	// Replace la pièce dans le tetromino vide
+	for r := 0; r < 4; r++ {
+		for c := 0; c < 4; c++ {
+			if t[r][c] == '#' {
+				newRow := r - minRow
+				newCol := c - minCol
+				newTetro[newRow][newCol] = '#'
+			}
+		}
+	}
+
+	return newTetro
 }
 
 func Lettering(group []tetromino) []tetromino {
 	for i := 0; i < len(group); i++ {
-		for _, line := range group[i] {
-			for _, char := range line {
-				if char == '#' {
-					char = rune(65 + i)
+		for rowIdx := 0; rowIdx < 4; rowIdx++ {
+			for colIdx := 0; colIdx < 4; colIdx++ {
+				if group[i][rowIdx][colIdx] == '#' {
+					group[i][rowIdx][colIdx] = rune(65 + i)
 				}
 			}
-
 		}
 	}
 	return group
