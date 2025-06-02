@@ -85,6 +85,20 @@ func Tetromino(file *os.File) []tetromino {
 	return tetrominoes
 }
 
+func Lettering(group []tetromino) []tetromino {
+	for i := 0; i < len(group); i++ {
+		for _, line := range group[i] {
+			for _, char := range line {
+				if char == '#' {
+					char = rune(65 + i)
+				}
+			}
+
+		}
+	}
+	return group
+}
+
 func PrintSquare(n int, finalSquare square) {
 	for i := 0; i < n; i++ { // Outer loop for rows
 		for j := 0; j < n; j++ { // Inner loop for columns
