@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	tetris "tetris-optimizer/functions"
 )
@@ -14,11 +13,10 @@ func main() {
 		tetris.NoFile()
 	}
 
+	// Ouverture du fichier
 	file, err := os.Open(os.Args[1])
 	tetris.Error(err)
-	tetris.Scanner(file)
 	defer file.Close()
-	finalSquare := tetris.MakeSquare(tetris.CountPieces(file))
 
-	fmt.Println(finalSquare)
+	tetris.Optimizer(file)
 }
