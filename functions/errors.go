@@ -11,7 +11,7 @@ func NoFile() {
 }
 
 func NotValid() {
-	fmt.Println("Error : Invalid format. Check the files and try again.")
+	fmt.Println("Error : Invalid tetromino format. Check the files and try again.")
 	os.Exit(1)
 }
 
