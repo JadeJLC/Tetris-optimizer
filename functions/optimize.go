@@ -42,7 +42,7 @@ func RemovePiece(t tetromino, s square, x, y int) {
 	}
 }
 
-func PlaceThemAll(tetrominos []tetromino, s square, n int) bool {
+func PlaceThemAll(tetrominos []tetromino, s square) bool {
 	if len(tetrominos) == 0 {
 		return true
 	}
@@ -50,11 +50,11 @@ func PlaceThemAll(tetrominos []tetromino, s square, n int) bool {
 	t := tetrominos[0]
 	size := len(s)
 
-	for x := 0; x <= size-n; x++ {
-		for y := 0; y <= size-n; y++ {
+	for x := 0; x <= size-1; x++ {
+		for y := 0; y <= size-1; y++ {
 			if CheckPiece(t, s, x, y) {
 				PlacePiece(t, s, x, y)
-				if PlaceThemAll(tetrominos[1:], s, n) {
+				if PlaceThemAll(tetrominos[1:], s) {
 					return true
 				}
 				RemovePiece(t, s, x, y)
@@ -78,7 +78,7 @@ func Optimizer(file *os.File) {
 	var finalSquare square
 	for {
 		finalSquare = MakeSquare(size)
-		if PlaceThemAll(tetrominos, finalSquare, n) {
+		if PlaceThemAll(tetrominos, finalSquare) {
 			break
 		}
 		size++

@@ -9,7 +9,24 @@ import (
 func CheckGeometry(t tetromino) bool {
 	visited := [4][4]bool{}
 	queue := [][2]int{{0, 0}}
-	visited[0][0] = true
+
+	if t[0][0] == '#' {
+		visited[0][0] = true
+	} else {
+		for i := 1; i < 4; i++ {
+			if t[i][0] == '#' {
+				visited[i][0] = true
+				queue = [][2]int{{i, 0}}
+				break
+			} else if t[0][i] == '#' {
+				visited[0][i] = true
+				queue = [][2]int{{i, 0}}
+				break
+			} else {
+				continue
+			}
+		}
+	}
 	counter := 1
 
 	directions := [][2]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}} // right, down, left, up
