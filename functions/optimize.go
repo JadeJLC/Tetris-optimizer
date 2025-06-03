@@ -5,9 +5,9 @@ import (
 )
 
 type square [][]rune
-type tetromino [4][4]rune
+type Tetro [4][4]rune
 
-func CheckPiece(t tetromino, s square, x, y int) bool {
+func CheckPiece(t Tetro, s square, x, y int) bool {
 	for i := 0; i < 4; i++ {
 		for j := 0; j < 4; j++ {
 			if t[i][j] != '.' {
@@ -22,7 +22,7 @@ func CheckPiece(t tetromino, s square, x, y int) bool {
 	return true
 }
 
-func PlacePiece(t tetromino, s square, x, y int) {
+func PlacePiece(t Tetro, s square, x, y int) {
 	for i := 0; i < 4; i++ {
 		for j := 0; j < 4; j++ {
 			if t[i][j] != '.' {
@@ -32,7 +32,7 @@ func PlacePiece(t tetromino, s square, x, y int) {
 	}
 }
 
-func RemovePiece(t tetromino, s square, x, y int) {
+func RemovePiece(t Tetro, s square, x, y int) {
 	for i := 0; i < 4; i++ {
 		for j := 0; j < 4; j++ {
 			if t[i][j] != '.' {
@@ -42,7 +42,7 @@ func RemovePiece(t tetromino, s square, x, y int) {
 	}
 }
 
-func PlaceThemAll(tetrominos []tetromino, s square) bool {
+func PlaceThemAll(tetrominos []Tetro, s square) bool {
 	if len(tetrominos) == 0 {
 		return true
 	}

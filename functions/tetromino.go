@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func CheckGeometry(t tetromino) bool {
+func CheckGeometry(t Tetro) bool {
 	visited := [4][4]bool{}
 	queue := [][2]int{{0, 0}}
 
@@ -47,11 +47,11 @@ func CheckGeometry(t tetromino) bool {
 	return counter == 4
 }
 
-func Tetromino(file *os.File) []tetromino {
-	var tetrominoes []tetromino
+func Tetromino(file *os.File) []Tetro {
+	var tetrominoes []Tetro
 
 	scanner := bufio.NewScanner(file)
-	var currentTetromino tetromino
+	var currentTetromino Tetro
 	row := 0
 	tetrominoCount := 0
 
@@ -61,7 +61,7 @@ func Tetromino(file *os.File) []tetromino {
 		if line == "" {
 			if row == 4 {
 				tetrominoes = append(tetrominoes, currentTetromino)
-				currentTetromino = tetromino{}
+				currentTetromino = Tetro{}
 				row = 0
 				tetrominoCount++
 			} else if row > 0 {
@@ -101,7 +101,7 @@ func Tetromino(file *os.File) []tetromino {
 	return tetrominoes
 }
 
-func MoveTetromino(t tetromino) tetromino {
+func MoveTetromino(t Tetro) Tetro {
 	minRow := 4
 	minCol := 4
 
@@ -123,7 +123,7 @@ func MoveTetromino(t tetromino) tetromino {
 	}
 
 	// Crée un tetromino vide
-	var newTetro tetromino
+	var newTetro Tetro
 
 	for r := 0; r < 4; r++ {
 		for c := 0; c < 4; c++ {
@@ -149,7 +149,7 @@ func MoveTetromino(t tetromino) tetromino {
 	return newTetro
 }
 
-func Lettering(group []tetromino) []tetromino {
+func Lettering(group []Tetro) []Tetro {
 	for i := 0; i < len(group); i++ {
 		for rowIdx := 0; rowIdx < 4; rowIdx++ {
 			for colIdx := 0; colIdx < 4; colIdx++ {

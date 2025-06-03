@@ -7,7 +7,6 @@ import (
 	"strings"
 )
 
-// Fonction ok
 func CountPieces(file *os.File) int {
 	file.Seek(0, 0)
 
