@@ -73,7 +73,7 @@ func Tetromino(file *os.File) []tetromino {
 
 	if row == 4 {
 		tetrominoes = append(tetrominoes, currentTetromino)
-	} else if row > 0 {
+	} else {
 		NotValid()
 	}
 
@@ -108,24 +108,24 @@ func MoveTetromino(t tetromino) tetromino {
 	// Crée un tetromino vide
 	var newTetro tetromino
 
-	if CheckGeometry(t) {
-		for r := 0; r < 4; r++ {
-			for c := 0; c < 4; c++ {
-				newTetro[r][c] = '.'
-			}
+	for r := 0; r < 4; r++ {
+		for c := 0; c < 4; c++ {
+			newTetro[r][c] = '.'
 		}
+	}
 
-		// Replace la pièce dans le tetromino vide
-		for r := 0; r < 4; r++ {
-			for c := 0; c < 4; c++ {
-				if t[r][c] == '#' {
-					newRow := r - minRow
-					newCol := c - minCol
-					newTetro[newRow][newCol] = '#'
-				}
+	// Replace la pièce dans le tetromino vide
+	for r := 0; r < 4; r++ {
+		for c := 0; c < 4; c++ {
+			if t[r][c] == '#' {
+				newRow := r - minRow
+				newCol := c - minCol
+				newTetro[newRow][newCol] = '#'
 			}
 		}
-	} else {
+	}
+
+	if !CheckGeometry(newTetro) {
 		NotValid()
 	}
 

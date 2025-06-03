@@ -7,24 +7,36 @@ import (
 	"strings"
 )
 
+// Fonction ok
 func CountPieces(file *os.File) int {
+	file.Seek(0, 0)
+
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 
-	n := 0
+	lines := []string{}
+	lineNum := 0
 	for scanner.Scan() {
-		line := scanner.Text()
-		if strings.TrimSpace(line) == "" {
-			continue // Skip empty lines
+		text := scanner.Text()
+		lineNum++
+		trimmed := strings.TrimSpace(text)
+		if trimmed != "" {
+			if len(trimmed) != 4 {
+				NotValid()
+			}
+			lines = append(lines, trimmed)
 		}
-		n += 1
 	}
 
-	if n%4 != 0 || n == 0 {
+	if len(lines) == 0 {
 		NotValid()
 	}
-	n /= 4
-	return n
+
+	if len(lines)%4 != 0 {
+		NotValid()
+	}
+
+	return len(lines) / 4
 }
 
 func MakeSquare(n int) square {
@@ -42,7 +54,10 @@ func MakeSquare(n int) square {
 func PrintSquare(n int, finalSquare square) {
 	for i := 0; i < n; i++ { // Outer loop for rows
 		for j := 0; j < n; j++ { // Inner loop for columns
-			fmt.Print(finalSquare[i][j])
+			if finalSquare[i][j] == 32 {
+				finalSquare[i][j] = '.'
+			}
+			fmt.Printf("%c", finalSquare[i][j])
 		}
 		fmt.Println() // New line after each row
 	}
