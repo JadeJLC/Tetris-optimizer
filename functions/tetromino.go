@@ -54,6 +54,7 @@ func Tetromino(file *os.File) []Tetro {
 	var currentTetromino Tetro
 	row := 0
 	tetrominoCount := 0
+	hashnumber := 0
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -74,8 +75,6 @@ func Tetromino(file *os.File) []Tetro {
 			NotValid()
 		}
 
-		hashnumber := 0
-
 		for col, char := range line {
 			if char == '#' {
 				hashnumber += 1
@@ -86,6 +85,17 @@ func Tetromino(file *os.File) []Tetro {
 			currentTetromino[row][col] = char
 		}
 		row++
+
+		//	fmt.Printf("Row : %v / Hash : %v\n", row, hashnumber)
+
+		if row == 4 && hashnumber != 4 {
+			NotValid()
+		}
+
+		if row == 4 && hashnumber == 4 {
+			hashnumber = 0
+		}
+
 	}
 
 	if row == 4 {
