@@ -51,19 +51,21 @@ Go doit être installé sur votre ordinateur.
 ```
 
 3.  **Lancer le fichier**
-    Alternatively, to run without building an executable (for development):
     ```bash
     go run ./main . nomdufichier.txt
     ```
 
 ### **Sortie attendue**
+
 Le format de sortie de fichier indique chaque pièce par une lettre, de cette façon :
+
 ```
 ABB.
 ABB.
 A.C.
 ACCC
 ```
+
 Trois tétrominos (ligne verticale 1, carré B et "T" C) dans un carré de 4x4.
 
 ## **Erreurs**
@@ -74,7 +76,6 @@ Le programme renvoie une erreur si :
 - Le format de chaque pièce ne correspond pas au format attendu
 - Le fichier n'est pas organisé correctement
 
-
 ## Structure du projet
 
 ```
@@ -82,7 +83,7 @@ project-root/
 ├── functions/      # Fonctions principale pour la manipulation des pièces
 ├── main/           # Package principal pour lancer l'application (main.go)
 │   └── main.go     # Fichier de lancement de Tetris Optimize
-├── go.mod          # Go module 
+├── go.mod          # Go module
 ├── readme.md       # Ce fichier
 ```
 
@@ -100,7 +101,6 @@ go run ./functions/functions_test.go
 
 - Ce projet est un projet optionnel développé dans le cadre de ma formation à Zone01.
 - Il a été en partie réalisé avec l'aide d'un autre apprenant versé en algorithmie.
-
 
 <div align="center">
 
