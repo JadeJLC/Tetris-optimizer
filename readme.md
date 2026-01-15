@@ -52,7 +52,7 @@ Go doit être installé sur votre ordinateur.
 
 3.  **Lancer le fichier**
     ```bash
-    go run ./main . nomdufichier.txt
+    go run ./main/main.go  ./main/input.txt
     ```
 
 ### **Sortie attendue**
