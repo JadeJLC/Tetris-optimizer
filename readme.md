@@ -40,7 +40,7 @@ Go doit être installé sur votre ordinateur.
     cd Tetris-optimizer
     ```
 
-2.  ** Créer un fichier texte**
+2.  **Créer un fichier texte**
     Exemple de format attendu pour une pièce :
 
 ```
